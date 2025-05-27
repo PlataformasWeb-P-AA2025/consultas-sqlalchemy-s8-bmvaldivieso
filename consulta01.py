@@ -14,10 +14,9 @@ session = Session()
 entregas = (session.query(Entrega)
     .join(Tarea)  # Relacionar Entrega con Tarea
     .join(Estudiante)  # Relacionar Entrega con Estudiante
-    .join(Inscripcion, Inscripcion.estudiante_id == Estudiante.id)  # Relacionar Estudiante con Inscripción
-    .join(Curso, Curso.id == Inscripcion.curso_id)  # Relacionar Inscripción con Curso
-    .join(Departamento, Departamento.id == Curso.departamento_id)  # Relacionar Curso con Departamento
-    .join(Instructor, Instructor.id == Curso.instructor_id)  # Relacionar Curso con Instructor
+    .join(Curso)  # Relacionar Tarea con Curso
+    .join(Departamento)  # Relacionar Curso con Departamento
+    .join(Instructor)  # Relacionar Curso con Instructor
     .filter(Departamento.nombre.like("%Arte%"))  # Filtrar solo por departamento de Arte
     .all())
 
